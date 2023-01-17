@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
-import { Dropdown } from 'semantic-ui-react';
+import { Dropdown, Button, Confirm } from 'semantic-ui-react';
 import './StudyGroupsPage.css';
 
 export function StudyGroupsPage() {
     // const [studyGroups, setStudyGroups] = useState([]);
     const [selectedGroup, setSelectedGroup] = useState(null);
+    const [open, setOpen] = useState(false);
 
     //dummy data
     const [studyGroups, setStudyGroups] = useState([
@@ -30,10 +31,30 @@ export function StudyGroupsPage() {
                 // handle error if any
             });
     }, []);
-    
     const handleGroupSelection = (e, { value }) => {
         setSelectedGroup(value);
     };
+
+    const handleLeaveGroup = () => {
+        // Remove group from studyGroups
+        setStudyGroups(studyGroups.filter(group => group.id !== selectedGroup.id));
+        setSelectedGroup(null);
+
+        // Send request to server to remove user from group
+        fetch('/api/study-groups/leave', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ groupId: selectedGroup.id }),
+        })
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error(res.statusText);
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
 
     return (
         <div>
@@ -55,6 +76,13 @@ export function StudyGroupsPage() {
                             <li key={resource.id}>{resource.name}</li>
                         ))}
                     </ul>
+                    <Button onClick={() => setOpen(true)}>Leave Group</Button>
+                    <Confirm
+                        open={open}
+                        onCancel={() => setOpen(false)}
+                        onConfirm={handleLeaveGroup}
+                        content="Are you sure you want to leave this group?"
+                    />
                 </div>
             )}
         </div>
