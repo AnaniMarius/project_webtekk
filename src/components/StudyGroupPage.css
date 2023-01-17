@@ -1,0 +1,52 @@
+.StudyGroupPage {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+  }
+  
+  .StudyGroupPage h1 {
+    margin-bottom: 20px;
+  }
+  
+  .StudyGroupPage h2 {
+    margin: 20px 0 10px 0;
+  }
+  
+  .StudyGroupPage ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .StudyGroupPage li {
+    margin: 10px 0;
+    padding: 10px;
+  }
+  
+  .StudyGroupPage form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+  }
+  
+  .StudyGroupPage label {
+    margin: 10px 0;
+  }
+  
+  .StudyGroupPage input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+  }
+  
+  .StudyGroupPage button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin: 20px 0;
+  }
+  
+  .StudyGroupPage p {
+    color: red;
+    margin: 10px 0;
+  }

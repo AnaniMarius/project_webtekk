@@ -1,0 +1,50 @@
+.LoginPage {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+  }
+  
+  .LoginPage form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .LoginPage label {
+    margin: 10px 0;
+  }
+  
+  .LoginPage input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+  }
+  
+  .LoginPage button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin: 20px 0;
+  }
+  
+  .LoginPage p {
+    color: red;
+    margin: 10px 0;
+  }
+  .loginBtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 3px 5px;
+    border: none;
+    cursor: pointer;
+    margin: 3px;
+  }
+
+  #showPasswordBtn{
+    background-color: #7a7c78;
+    color: white;
+    padding: 3px 5px;
+    border: none;
+    cursor: pointer;
+    margin: 3px;
+  }

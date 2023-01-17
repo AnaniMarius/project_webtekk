@@ -1,0 +1,39 @@
+.NoteEditorPage {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+.NoteEditorPage form {
+  display: flex;
+  flex-direction: column;
+}
+
+.NoteEditorPage label {
+  margin: 10px 0;
+}
+
+.NoteEditorPage input,
+.NoteEditorPage textarea {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+}
+
+.NoteEditorPage textarea {
+  height: 300px;
+  resize: none;
+}
+
+.NoteEditorPage button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  margin: 20px 0;
+}
+
+.NoteEditorPage p {
+  color: red;
+  margin: 10px 0;
+}
