@@ -13,15 +13,16 @@ import { StudyGroupPage } from './components/StudyGroupPage';
 import { StudyGroupsPage } from './components/StudyGroupsPage';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isLoggedIn"));
   const [selectedNote, setSelectedNote] = useState(null);
 
   function handleLogin(username, password) {
-    // perform login logic here
+    localStorage.setItem('isLoggedIn', true);
     setIsLoggedIn(true);
   }
 
   function handleLogout() {
+    localStorage.removeItem('isLoggedIn');
     setIsLoggedIn(false);
   }
 
@@ -34,7 +35,7 @@ function App() {
       <div>
         {isLoggedIn ? (
           <nav>
-            <Link to="/">Home</Link>
+            <Link to="/">My Notes</Link>
             <Link to="/study-group">My Study Group</Link>
             <Link to="/study-groups">Study Groups</Link>
             <button onClick={handleLogout}>Logout</button>
