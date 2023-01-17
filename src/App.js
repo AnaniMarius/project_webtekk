@@ -49,7 +49,7 @@ function App() {
           {/* <Route path="login">
             <LoginPage onLogin={handleLogin} />
           </Route> */}
-          <Route path="login" element={<LoginPage onLogin={handleLogin} />} />
+          <Route path="login" element={ !isLoggedIn ? <LoginPage onLogin={handleLogin} />: <div/>} />
           {/* <Route path="/">
             <NoteListPage
               selectedNote={selectedNote}
