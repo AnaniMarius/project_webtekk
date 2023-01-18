@@ -100,7 +100,10 @@ export function StudyGroupPage({ currentUserEmail }) {
         <h2>Members</h2>
         <ul>
           {studyGroup.members.map(member => (
-            <li key={member.email}>{member.email}</li>
+            <li key={member.email}>
+              {member.email}
+              <button onClick={() => handleKick(member.email)}>Kick</button>
+            </li>
           ))}
         </ul>
         {error && <p>Error: {error}</p>}
