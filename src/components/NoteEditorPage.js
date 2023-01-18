@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+// import MarkdownEditor from './MarkdownEditor';
 import "./NoteEditorPage.css";
 
 export function NoteEditorPage({ match }) {

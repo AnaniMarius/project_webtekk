@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import "./NoteListPage.css";
+import { MarkdownEditor } from './MarkdownEditor'; // import the markdown editor component
 
 export function NoteListPage() {
   // const [notes, setNotes] = useState([]);
@@ -11,6 +12,7 @@ export function NoteListPage() {
     { id: 4, title: 'Note 4', content: 'Content of note 4' }
     ]);
   const [error, setError] = useState(null);
+  const [showEditor, setShowEditor] = useState(false); // state to control the visibility of the editor
 
   useEffect(() => {
     async function fetchNotes() {
@@ -26,6 +28,10 @@ export function NoteListPage() {
     fetchNotes();
   }, []);
 
+  const openEditor = () => {
+    setShowEditor(true);
+  }
+
   return (
     <div>
       <h1>My Notes</h1>
@@ -35,6 +41,8 @@ export function NoteListPage() {
           <li key={note.id}>{note.title}</li>
         ))}
       </ul>
+      <button onClick={openEditor}>Create another note</button>
+      {showEditor && <MarkdownEditor />}
     </div>
   );
 }
