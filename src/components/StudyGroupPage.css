@@ -1,3 +1,65 @@
+@media (max-width: 600px) {
+  .StudyGroupPage {
+    font-size: 14px;
+  }
+
+  .StudyGroupPage h1 {
+    font-size: 18px;
+  }
+
+  .StudyGroupPage h2 {
+    font-size: 16px;
+  }
+
+  .StudyGroupPage li {
+    margin: 5px 0;
+    padding: 5px;
+  }
+
+  .StudyGroupPage form {
+    flex-direction: column;
+  }
+
+  .StudyGroupPage label,
+  .StudyGroupPage input {
+    width: 100%;
+  }
+}
+
+@media (min-width: 601px) {
+  .StudyGroupPage {
+    font-size: 16px;
+  }
+
+  .StudyGroupPage h1 {
+    font-size: 24px;
+  }
+
+  .StudyGroupPage h2 {
+    font-size: 20px;
+  }
+
+  .StudyGroupPage li {
+    margin: 10px 0;
+    padding: 10px;
+  }
+
+  .StudyGroupPage form {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .StudyGroupPage label {
+    width: 20%;
+    text-align: right;
+    padding-right: 10px;
+  }
+
+  .StudyGroupPage input {
+    width: 80%;
+  }
+}
+
 .StudyGroupPage {
     font-family: Arial, sans-serif;
     margin: 20px;

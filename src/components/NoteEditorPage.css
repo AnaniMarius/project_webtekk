@@ -1,3 +1,41 @@
+@media (max-width: 600px) {
+  .NoteEditorPage {
+    font-size: 14px;
+  }
+
+  .NoteEditorPage form {
+    flex-direction: column;
+  }
+
+  .NoteEditorPage label,
+  .NoteEditorPage input,
+  .NoteEditorPage textarea {
+    width: 100%;
+  }
+
+  .NoteEditorPage textarea {
+    height: auto;
+  }
+}
+
+@media (min-width: 601px) {
+  .NoteEditorPage form {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .NoteEditorPage label {
+    width: 20%;
+    text-align: right;
+    padding-right: 10px;
+  }
+
+  .NoteEditorPage input,
+  .NoteEditorPage textarea {
+    width: 80%;
+  }
+}
+
 .NoteEditorPage {
   font-family: Arial, sans-serif;
   margin: 20px;

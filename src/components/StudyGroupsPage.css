@@ -1,3 +1,47 @@
+@media (max-width: 600px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+  
+  .ui.dropdown {
+    width: 80%;
+  }
+  
+  h2 {
+    font-size: 1.2rem;
+  }
+  
+  ul {
+    width: 80%;
+  }
+  
+  li {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 601px) {
+  h1 {
+    font-size: 2rem;
+  }
+  
+  .ui.dropdown {
+    width: 50%;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  ul {
+    width: 50%;
+  }
+  
+  li {
+    font-size: 1.2rem;
+  }
+}
+
 h1 {
     font-size: 2rem;
     text-align: center;

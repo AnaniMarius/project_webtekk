@@ -9,10 +9,10 @@ export function LoginPage({ onLogin }) {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    if (!/@stud.ase.ro$/.test(username)) {
-      setError("Email must be in the format 'username@stud.ase.ro'");
-      return;
-    }
+    // if (!/@stud.ase.ro$/.test(username)) {
+    //   setError("Email must be in the format 'username@stud.ase.ro'");
+    //   return;
+    // }
     // try {
     //   const response = await fetch('/api/login', {
     //     method: 'POST',
@@ -31,6 +31,7 @@ export function LoginPage({ onLogin }) {
     //   setError(error.message);
     // }
 
+    //DELETE IF NOT USING DUMMY FROM HERE WAY BEFORE let passwordInput; atentie la acolada
     //dummy
     const dummyData = [
       { username: 'admin1@stud.ase.ro', password: '123' },
@@ -38,17 +39,18 @@ export function LoginPage({ onLogin }) {
       { username: 'admin3@stud.ase.ro', password: '123' },
       { username: 'admin4@stud.ase.ro', password: '123' },
     ]
-    // Check if entered username and password match any of the dummy data
+    // Check if entered username and password match any of the dummy data DELETE IF NOT USING DUMMY
     const match = dummyData.find(data => data.username === username && data.password === password);
-
+    //DELETE IF NOT USING DUMMY
     if (match) {
-      // Login is successful
+      // Login is successful 
       localStorage.setItem('token', 'dummy-token');
       onLogin(username);
     } else {
       // Invalid username or password
       setError('Invalid username or password');
     }
+    //IF NOT USING DUMMY, DELETE ALL THE WAY TO HERE
   }
 
   let passwordInput;

@@ -1,4 +1,35 @@
-.LoginPage {
+@media (max-width: 600px) {
+  .LoginPage {
+    font-size: 14px;
+  }
+  
+  .LoginPage form {
+    flex-direction: column;
+  }
+  
+  .LoginPage label, .LoginPage input {
+    width: 100%;
+  }
+}
+
+@media (min-width: 601px) {
+  .LoginPage form {
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .LoginPage label {
+    width: 30%;
+    text-align: right;
+    padding-right: 10px;
+  }
+  
+  .LoginPage input {
+    width: 70%;
+  }
+}
+
+  .LoginPage { 
     font-family: Arial, sans-serif;
     margin: 20px;
   }
@@ -16,7 +47,7 @@
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
-  }
+  } 
   
   .LoginPage button {
     background-color: #4CAF50;

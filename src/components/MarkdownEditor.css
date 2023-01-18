@@ -1,3 +1,37 @@
+@media (max-width: 600px) {
+    .markdown-editor {
+      width: 100%;
+      height: auto;
+    }
+  
+    .markdown-editor textarea {
+      width: 100%;
+      height: auto;
+      font-size: 14px;
+    }
+  
+    .markdown-editor input {
+      font-size: 16px;
+    }
+  }
+  
+  @media (min-width: 601px) {
+    .markdown-editor {
+      width: 98%;
+      height: 400px;
+    }
+  
+    .markdown-editor textarea {
+      width: 99%;
+      height: 93%;
+      font-size: 16px;
+    }
+  
+    .markdown-editor input {
+      font-size: 18px;
+    }
+  }
+
 .markdown-editor {
     /* Add styles for the overall container of the editor */
     width: 98%;
