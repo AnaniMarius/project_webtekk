@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import "./StudyGroupPage.css";
+import { MarkdownEditor } from './MarkdownEditor'; // import the markdown editor component
 
 export function StudyGroupPage({ currentUserEmail }) {
   const [studyGroup, setStudyGroup] = useState({
@@ -19,6 +20,8 @@ export function StudyGroupPage({ currentUserEmail }) {
   ]);
   const [error, setError] = useState(null);
   const [inviteSuccess, setInviteSuccess] = useState(null);
+  const [showEditor, setShowEditor] = useState(false);
+  const [noteToEdit, setNoteToEdit] = useState(null); // new state for the note to be edited
 
   useEffect(() => {
     async function fetchStudyGroup() {
@@ -67,7 +70,49 @@ export function StudyGroupPage({ currentUserEmail }) {
       setError(error.message);
     }
   }
+  
+  async function handleKick(memberEmail) {
+    const confirm = window.confirm(`Are you sure you want to kick ${memberEmail} from the group?`);
+    if(confirm) {
+    try {
+      // You can remove this block of code if you want to use the dummy data
+      /*
+      const response = await fetch(`/api/studygroup/${currentUserEmail}/members/${memberEmail}`, {
+        method: 'DELETE',
+      });
+      if (response.ok) {
+        // update the state of the members array by removing the kicked member
+        setStudyGroup({ ...studyGroup, members: studyGroup.members.filter(member => member.email !== memberEmail) });
+      } else {
+        const result = await response.json();
+        setError(result.message);
+      }
+      */
+    } catch (error) {
+      setError(error.message);
+    }
+    }
+  }
 
+  const handleDelete = async (noteId) => {
+    try {
+      await fetch(`/api/notes/${noteId}`, {
+        method: 'DELETE',
+      });
+      setNotes(notes.filter(note => note.id !== noteId));
+    } catch (error) {
+      setError(error.message);
+    }
+  }
+
+  const handleEdit = (note) => {
+    setNoteToEdit(note);
+    setShowEditor(true);
+  }
+
+  const openEditor = () => {
+    setShowEditor(true);
+  } 
   return (
     <>
       {inviteSuccess === true && <p>Invite sent successfully!</p>}
@@ -77,8 +122,13 @@ export function StudyGroupPage({ currentUserEmail }) {
         <h2>Members</h2>
         <ul>
           {studyGroup.members.map(member => (
-            <li key={member.email}>{member.email}</li>))}
+            <li key={member.email}>
+              {member.email}
+              <button onClick={() => handleKick(member.email)}>Kick</button>
+            </li>
+          ))}
         </ul>
+        {error && <p>Error: {error}</p>}
         <form onSubmit={handleInvite}>
           <label>
             Invite member by email:
@@ -87,11 +137,15 @@ export function StudyGroupPage({ currentUserEmail }) {
           <button type="submit">Invite</button>
         </form>
         <h3>Group Owner: {studyGroup.owner}</h3>
+        <button onClick={openEditor}>Create another note</button>
+        {showEditor && <MarkdownEditor />}
         <h2>Notes</h2>
         <ul>
           {notes.map(note => (
             <li key={note.id}><div>{note.title}</div>
-            <div>{note.content}</div><br></br><br></br></li>
+            <div>{note.content}</div><br></br><br></br>
+            <button onClick={() => handleDelete(note.id)}>Delete</button>
+            <button onClick={() => handleEdit(note)}>Edit</button></li>
           ))}
         </ul>
       </div>
