@@ -12,6 +12,7 @@ import { NoteEditorPage } from './components/NoteEditorPage';
 import { StudyGroupPage } from './components/StudyGroupPage';
 import { StudyGroupsPage } from './components/StudyGroupsPage';
 
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isLoggedIn"));
   const [selectedNote, setSelectedNote] = useState(null);

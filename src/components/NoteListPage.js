@@ -2,7 +2,14 @@ import React, { useState, useEffect } from 'react';
 import "./NoteListPage.css";
 
 export function NoteListPage() {
-  const [notes, setNotes] = useState([]);
+  // const [notes, setNotes] = useState([]);
+  //dummy dataset
+  const [notes, setNotes] = useState([
+    { id: 1, title: 'Note 1', content: 'Content of note 1' },
+    { id: 2, title: 'Note 2', content: 'Content of note 2' },
+    { id: 3, title: 'Note 3', content: 'Content of note 3' },
+    { id: 4, title: 'Note 4', content: 'Content of note 4' }
+    ]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
