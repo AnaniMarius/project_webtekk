@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import "./StudyGroupPage.css";
+import { MarkdownEditor } from './MarkdownEditor'; // import the markdown editor component
 
 export function StudyGroupPage({ currentUserEmail }) {
   const [studyGroup, setStudyGroup] = useState({
@@ -19,6 +20,8 @@ export function StudyGroupPage({ currentUserEmail }) {
   ]);
   const [error, setError] = useState(null);
   const [inviteSuccess, setInviteSuccess] = useState(null);
+  const [showEditor, setShowEditor] = useState(false);
+  const [noteToEdit, setNoteToEdit] = useState(null); // new state for the note to be edited
 
   useEffect(() => {
     async function fetchStudyGroup() {
@@ -91,6 +94,25 @@ export function StudyGroupPage({ currentUserEmail }) {
     }
   }
 
+  const handleDelete = async (noteId) => {
+    try {
+      await fetch(`/api/notes/${noteId}`, {
+        method: 'DELETE',
+      });
+      setNotes(notes.filter(note => note.id !== noteId));
+    } catch (error) {
+      setError(error.message);
+    }
+  }
+
+  const handleEdit = (note) => {
+    setNoteToEdit(note);
+    setShowEditor(true);
+  }
+
+  const openEditor = () => {
+    setShowEditor(true);
+  } 
   return (
     <>
       {inviteSuccess === true && <p>Invite sent successfully!</p>}
@@ -115,24 +137,21 @@ export function StudyGroupPage({ currentUserEmail }) {
           <button type="submit">Invite</button>
         </form>
         <h3>Group Owner: {studyGroup.owner}</h3>
+        <button onClick={openEditor}>Create another note</button>
+        {showEditor && <MarkdownEditor />}
         <h2>Notes</h2>
         <ul>
           {notes.map(note => (
             <li key={note.id}><div>{note.title}</div>
-            <div>{note.content}</div><br></br><br></br></li>
+            <div>{note.content}</div><br></br><br></br>
+            <button onClick={() => handleDelete(note.id)}>Delete</button>
+            <button onClick={() => handleEdit(note)}>Edit</button></li>
           ))}
         </ul>
       </div>
     </>
   );
 }
-
-// This component will handle the functionality of creating and managing a study group. It uses the useEffect hook to fetch the study group details from the server when the component mounts, it would handle the response of the server and it will handle the error if the request failed.
-// It also has a form that allows users to invite new members to the study group by email. This form will handle the sending invite request to the server.
-// It's important to make sure that the user is authenticated before sending a request to the server and also to use HTTPS to secure the communication between the client and the server.
-// want to add the ability to view and delete members from the study group, and the ability for the members to share notes with each other within the group. Additionally, you may want to implement a way for users to create and manage multiple study groups.
-// consider the security and data privacy aspects of the study groups. You may want to consider encrypting the data and using secure communication channels, and also giving users control over their data and allowing them to delete their data if they choose to leave the study group.
-// test
 
 // This component will handle the functionality of creating and managing a study group. It uses the useEffect hook to fetch the study group details from the server when the component mounts, it would handle the response of the server and it will handle the error if the request failed.
 // It also has a form that allows users to invite new members to the study group by email. This form will handle the sending invite request to the server.
