@@ -22,3 +22,6 @@
     color: red;
     margin: 10px 0;
   }
+  li > div {
+    display: block;
+  }

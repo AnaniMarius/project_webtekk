@@ -36,13 +36,14 @@ export function NoteListPage() {
     <div>
       <h1>My Notes</h1>
       {error && <p>{error}</p>}
-      <ul>
-        {notes.map(note => (
-          <li key={note.id}>{note.title}</li>
-        ))}
-      </ul>
       <button onClick={openEditor}>Create another note</button>
       {showEditor && <MarkdownEditor />}
+      <ul>
+        {notes.map(note => (
+          <li key={note.id}><div>{note.title}</div>
+          <div>{note.content}</div><br></br><br></br></li>
+        ))}
+      </ul>
     </div>
   );
 }

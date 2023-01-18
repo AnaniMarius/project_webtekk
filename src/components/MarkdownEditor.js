@@ -40,27 +40,27 @@ export function MarkdownEditor() {
 
   return (
     <div>
-    {!showEditor && <button onClick={() => setShowEditor(true)}>Open Markdown Editor</button>}
+      {!showEditor && <button onClick={() => setShowEditor(true)}>Open Markdown Editor</button>}
       {showEditor &&
-      <div className="markdown-editor">
-      <h1>
-        <input 
-          className="markdown-title"
-          type="text"
-          value={title}
-          onChange={handleTitleChange}
-          placeholder="Title"
-        />
-      </h1>
-      <textarea 
-        className="markdown-content"
-        value={content}
-        onChange={handleContentChange}
-        placeholder="Content"
-      />
-      <button className="cancel-button" onClick={handleCancel}>Cancel</button>
-      <button className="save-button" onClick={handleSave}>Save</button>
-    </div>}
+        <div className="markdown-editor">
+          <h1>
+            <input
+              className="markdown-title"
+              type="text"
+              value={title}
+              onChange={handleTitleChange}
+              placeholder="Title"
+            />
+          </h1>
+          <textarea
+            className="markdown-content"
+            value={content}
+            onChange={handleContentChange}
+            placeholder="Content"
+          />
+          <button className="cancel-button" onClick={handleCancel}>Cancel</button>
+          <button className="save-button" onClick={handleSave}>Save</button>
+        </div>}
     </div>
   );
 }
