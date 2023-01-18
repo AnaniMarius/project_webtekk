@@ -2,16 +2,33 @@ import React, { useState, useEffect } from 'react';
 import "./StudyGroupPage.css";
 
 export function StudyGroupPage({ currentUserEmail }) {
-  const [studyGroup, setStudyGroup] = useState({ title: '', members: [], owner: '' });
+  const [studyGroup, setStudyGroup] = useState({
+    title: 'React Study Group',
+    members: [
+      { email: 'johndoe@example.com' },
+      { email: 'janedoe@example.com' },
+      { email: 'jimmydoe@example.com' },
+    ],
+    owner: 'janedoe@example.com',
+  });
+  const [notes, setNotes] = useState([
+    { id: 1, title: 'Note 1', content: 'Content of note 1' },
+    { id: 2, title: 'Note 2', content: 'Content of note 2' },
+    { id: 3, title: 'Note 3', content: 'Content of note 3' },
+    { id: 4, title: 'Note 4', content: 'Content of note 4' }
+  ]);
   const [error, setError] = useState(null);
   const [inviteSuccess, setInviteSuccess] = useState(null);
 
   useEffect(() => {
     async function fetchStudyGroup() {
       try {
+        // You can remove this block of code if you want to use the dummy data
+        /*
         const response = await fetch(`/api/studygroup/${currentUserEmail}`);
         const data = await response.json();
         setStudyGroup(data);
+        */
       } catch (error) {
         setError(error.message);
       }
@@ -26,6 +43,8 @@ export function StudyGroupPage({ currentUserEmail }) {
     const data = { email };
 
     try {
+      // You can remove this block of code if you want to use the dummy data
+      /*
       const response = await fetch(`/api/studygroup/${currentUserEmail}/invite`, {
         method: 'POST',
         headers: {
@@ -42,6 +61,7 @@ export function StudyGroupPage({ currentUserEmail }) {
         setInviteSuccess(false);
         setError(result.message);
       }
+      */
     } catch (error) {
       setInviteSuccess(false);
       setError(error.message);
@@ -57,8 +77,7 @@ export function StudyGroupPage({ currentUserEmail }) {
         <h2>Members</h2>
         <ul>
           {studyGroup.members.map(member => (
-            <li key={member.email}>{member.email}</li>
-          ))}
+            <li key={member.email}>{member.email}</li>))}
         </ul>
         <form onSubmit={handleInvite}>
           <label>
@@ -68,6 +87,13 @@ export function StudyGroupPage({ currentUserEmail }) {
           <button type="submit">Invite</button>
         </form>
         <h3>Group Owner: {studyGroup.owner}</h3>
+        <h2>Notes</h2>
+        <ul>
+          {notes.map(note => (
+            <li key={note.id}><div>{note.title}</div>
+            <div>{note.content}</div><br></br><br></br></li>
+          ))}
+        </ul>
       </div>
     </>
   );
