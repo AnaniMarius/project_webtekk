@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import "./MarkdownEditor.css"
 
-export function MarkdownEditor() {
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+export function MarkdownEditor({ note, onSave, onCancel }) {
+  const [title, setTitle] = useState(note ? note.title : '');
+  const [content, setContent] = useState(note ? note.content : '');
   const [showEditor, setShowEditor] = useState(true);
 
   function handleTitleChange(e) {
@@ -16,6 +16,7 @@ export function MarkdownEditor() {
 
   function handleCancel() {
     setShowEditor(false);
+    onCancel && onCancel();
   }
 
   function handleSave() {
@@ -25,20 +26,23 @@ export function MarkdownEditor() {
         title: title,
         content: content
       };
-      fetch('/api/save', {
-        method: 'POST',
+      const method = note ? 'PUT' : 'POST';
+      const url = note ? '/api/notes/${note.id}' : '/api/notes';
+      fetch(url, {
+        method,
         body: JSON.stringify(data),
         headers: {
           'Content-Type': 'application/json'
         }
       });
+      onSave && onSave();
     } else {
       // handle error, for example show a message to the user that the fields are required
       alert('Title and content are required');
     }
   }
 
-  return (
+  return ( 
     <div>
       {!showEditor && <button onClick={() => setShowEditor(true)}>Open Markdown Editor</button>}
       {showEditor &&

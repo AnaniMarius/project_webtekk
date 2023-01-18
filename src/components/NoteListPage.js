@@ -3,8 +3,6 @@ import "./NoteListPage.css";
 import { MarkdownEditor } from './MarkdownEditor'; // import the markdown editor component
 
 export function NoteListPage() {
-  // const [notes, setNotes] = useState([]);
-  //dummy dataset
   const [notes, setNotes] = useState([
     { id: 1, title: 'Note 1', content: 'Content of note 1' },
     { id: 2, title: 'Note 2', content: 'Content of note 2' },
@@ -12,7 +10,8 @@ export function NoteListPage() {
     { id: 4, title: 'Note 4', content: 'Content of note 4' }
     ]);
   const [error, setError] = useState(null);
-  const [showEditor, setShowEditor] = useState(false); // state to control the visibility of the editor
+  const [showEditor, setShowEditor] = useState(false);
+  const [noteToEdit, setNoteToEdit] = useState(null); // new state for the note to be edited
 
   useEffect(() => {
     async function fetchNotes() {
@@ -28,9 +27,25 @@ export function NoteListPage() {
     fetchNotes();
   }, []);
 
-  const openEditor = () => {
+  const handleDelete = async (noteId) => {
+    try {
+      await fetch(`/api/notes/${noteId}`, {
+        method: 'DELETE',
+      });
+      setNotes(notes.filter(note => note.id !== noteId));
+    } catch (error) {
+      setError(error.message);
+    }
+  }
+
+  const handleEdit = (note) => {
+    setNoteToEdit(note);
     setShowEditor(true);
   }
+
+  const openEditor = () => {
+    setShowEditor(true);
+  } 
 
   return (
     <div>
@@ -39,11 +54,15 @@ export function NoteListPage() {
       <button onClick={openEditor}>Create another note</button>
       {showEditor && <MarkdownEditor />}
       <ul>
-        {notes.map(note => (
+        {notes.map(note => ( 
           <li key={note.id}><div>{note.title}</div>
-          <div>{note.content}</div><br></br><br></br></li>
+          <div>{note.content}</div><br></br><br></br>
+            <button onClick={() => handleDelete(note.id)}>Delete</button>
+            <button onClick={() => handleEdit(note)}>Edit</button>
+          </li>
         ))}
       </ul>
+      {/* {showEditor && <NoteEditorPage note={noteToEdit} />} */}
     </div>
   );
 }

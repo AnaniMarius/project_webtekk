@@ -27,11 +27,12 @@ export function StudyGroupPage() {
   return (
     <div>
       <h1>{studyGroup.title} Study Group</h1>
-      {error && <p>{error}</p>}
+      {error && <p>{error}</p>} 
+      
       <h2>Members</h2>
       <ul>
         {studyGroup.members.map(member => (
-          <li key={member.id}>{member.name}</li>
+          <li key={member.id}>{member.email}</li>
         ))}
       </ul>
       <form onSubmit={handleInvite}>
