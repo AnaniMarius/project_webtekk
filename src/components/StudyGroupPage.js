@@ -50,3 +50,4 @@ export function StudyGroupPage() {
 // It's important to make sure that the user is authenticated before sending a request to the server and also to use HTTPS to secure the communication between the client and the server.
 // want to add the ability to view and delete members from the study group, and the ability for the members to share notes with each other within the group. Additionally, you may want to implement a way for users to create and manage multiple study groups.
 // consider the security and data privacy aspects of the study groups. You may want to consider encrypting the data and using secure communication channels, and also giving users control over their data and allowing them to delete their data if they choose to leave the study group.
+// test
