@@ -3,7 +3,8 @@ import "./StudyGroupPage.css";
 
 export function StudyGroupPage() {
   const [studyGroup, setStudyGroup] = useState({ title: '', members: [] });
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(null);  
+  const [inviteSuccess, setInviteSuccess] = useState(null);
 
   useEffect(() => {
     async function fetchStudyGroup() {
@@ -19,32 +20,57 @@ export function StudyGroupPage() {
     fetchStudyGroup();
   }, []);
 
-  function handleInvite(event) {
+  async function handleInvite(event) {
     event.preventDefault();
-    // send invite to the server 
+    const email = event.target.elements.email.value;
+    const data = { email };
+  
+    try {
+      const response = await fetch('/api/studygroup/invite', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+      if (response.ok) {
+        setInviteSuccess(true);
+        setError(null);
+        event.target.elements.email.value = '';
+      } else {
+        const result = await response.json();
+        setInviteSuccess(false);
+        setError(result.message);
+      }
+    } catch (error) {
+      setInviteSuccess(false);
+      setError(error.message);
+    }
   }
 
-  return (
+  return (  
+    <>
+    {inviteSuccess === true && <p>Invite sent successfully!</p>}
+    {inviteSuccess === false && <p>Error sending invite: {error}</p>}
     <div>
       <h1>{studyGroup.title} Study Group</h1>
-      {error && <p>{error}</p>} 
-      
       <h2>Members</h2>
       <ul>
         {studyGroup.members.map(member => (
           <li key={member.id}>{member.email}</li>
         ))}
       </ul>
-      <form onSubmit={handleInvite}>
+      <form onSubmit={handleInvite}> 
         <label>
           Invite member by email:
-          <input type="email" />
+          <input type="email" name="email" />
         </label>
         <button type="submit">Invite</button>
-      </form>
-    </div>
+      </form> 
+    </div> 
+    </>
   );
-}
+} 
 
 // This component will handle the functionality of creating and managing a study group. It uses the useEffect hook to fetch the study group details from the server when the component mounts, it would handle the response of the server and it will handle the error if the request failed.
 // It also has a form that allows users to invite new members to the study group by email. This form will handle the sending invite request to the server.
